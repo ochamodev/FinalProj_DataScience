@@ -1,0 +1,6 @@
+
+CONFIG_FILE = "config.cfg"
+
+ACCESS_KEY = 'ACCESS_KEY'
+SECRET_KEY = "SECRET_KEY"
+IAM = "USER"
