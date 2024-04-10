@@ -23,10 +23,10 @@ create table if not exists dimPersona(
 create table if not exists dimVenta(
 	idventa serial primary key, 
     nombreCliente varchar(100),
-    idarticulo,
-    cantidad,
-    precio,
-    descuento,
+    idarticulo int,
+    cantidad int,
+    precio decimal(11, 2),
+    descuento decimal(1,2),
     fecha datetime, 
     total decimal(11, 2),
     campo_timestamp timestamp default now ()
@@ -67,7 +67,7 @@ create table hechos(
     idvVenta int,
     idFecha int,
     total decimal(11, 2),
-    discount decimal(11, 2),
+    descuento decimal(1, 2),
     ganancia decimal(11, 2),
     primary key (idArticulo, idPersona, idVenta, idFecha)
 )
