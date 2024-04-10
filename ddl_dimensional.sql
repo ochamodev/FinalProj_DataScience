@@ -4,7 +4,7 @@ create database pj_final_dimensional;
 use pj_final_dimensional;
 
 create table if not exists dimArticulo (
-	idarticulo int primary key auto_increment,
+	idarticulo serial primary key,
     categoria varchar(50),
     codigo varchar(50) not null, 
     nombre varchar(100),
@@ -13,7 +13,7 @@ create table if not exists dimArticulo (
 );
 
 create table if not exists dimPersona(
-	idpersona int primary key auto_increment, 
+	idpersona serial primary key, 
     nombre varchar(100),
     num_documento varchar(20),
     email varchar(50),
@@ -21,7 +21,7 @@ create table if not exists dimPersona(
 );
 
 create table if not exists dimVenta(
-	idventa int primary key auto_increment, 
+	idventa serial primary key, 
     nombreCliente varchar(100),
     idarticulo,
     cantidad,
@@ -66,5 +66,8 @@ create table hechos(
     idPersona int,
     idvVenta int,
     idFecha int,
+    total decimal(11, 2),
+    discount decimal(11, 2),
+    ganancia decimal(11, 2),
     primary key (idArticulo, idPersona, idVenta, idFecha)
 )
