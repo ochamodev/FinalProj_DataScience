@@ -1,8 +1,4 @@
 DDL_QUERY =  '''
-drop database if exists pj_final;
-create database pj_final;
-use pj_final;
-
 create table if not exists categoria (
 	idcategoria int primary key auto_increment,
     nombre varchar(50) not null,
