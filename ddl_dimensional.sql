@@ -1,7 +1,4 @@
 -- TODO Use postgres or Mysql?
-drop database if exists pj_final_dimensional;
-create database pj_final_dimensional;
-use pj_final_dimensional;
 
 create table if not exists dimArticulo (
 	idarticulo serial primary key,
@@ -57,7 +54,7 @@ create table if not exists dimFechas(
     mes_fiscal INT,
     cuarto_fiscal INT,
     anio_fiscal INT,
-    ultimo_dia_mes_bandera bandera_ultimo_dia_mes,
+    ultimo_dia_mes_bandera INT,
     mismo_dia_anio_anterior_fecha DATE,
     campo_timestamp timestamp default now ()
 );
