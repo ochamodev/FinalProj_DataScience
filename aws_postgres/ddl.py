@@ -32,7 +32,7 @@ create table if not exists dimVenta(
 
 create table if not exists dimFechas(
     idFecha INT PRIMARY KEY,
-    fecha_completa DATE,
+    fecha_completa timestamp,
     dia_semana INT,
     num_dia_mes INT,
     dia_nombre VARCHAR(9),
