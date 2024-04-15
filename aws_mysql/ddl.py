@@ -1,102 +1,137 @@
+<<<<<<< HEAD:aws_mysql/ddl.py
 DDL_QUERY =  '''
 create table if not exists categoria (
 	idcategoria int primary key auto_increment,
     nombre varchar(50) not null,
     descripcion varchar(255), 
     estado bit
-);
-
-create table if not exists articulo (
-	idarticulo int primary key auto_increment,
-    idcategoria int,
-    codigo varchar(50) not null, 
-    nombre varchar(100),
-    precio_venta decimal(11, 2),
-    stock int, 
-    descripcion varchar(255),
-    imagen varchar(20),
-    estado bit,
-    foreign key (idcategoria) references categoria(idcategoria)
-);
-
-create table if not exists persona(
-	idpersona int primary key auto_increment, 
-    tipo_persona varchar(20), 
-    nombre varchar(100),
-    tipo_documento varchar(20), 
-    num_documento varchar(20),
-    direccion varchar(70), 
-    telefono varchar(20),
-    email varchar(50)
-);
-
-create table if not exists rol(
-	idrol int primary key auto_increment, 
-	nombre varchar(30) not null, 
-    descripcion varchar(255),
-    estado bit
-);
-
-create table if not exists usuario(
-	idusuario int primary key auto_increment, 
-    idrol int, 
-    nombre varchar(100), 
-    tipo_documento varchar(20),
-    num_documento varchar(20), 
-    direccion varchar(20), 
-    telefono varchar(20), 
-    email varchar(50), 
-    clave varbinary(255),
-    estado bit,
-    foreign key (idrol) references rol(idrol)
-);
-
-create table if not exists ingreso(
-    idingreso int primary key auto_increment, 
-    idproveedor int,
-    idusuario int, 
-    tipo_comprobante varchar(20), 
-    serie_comprobante varchar(20), 
-    num_comprobante varchar(10), 
-    fecha datetime, 
-    impuesto decimal(4, 2), 
-    total decimal(11, 2), 
-    estado varchar(20), 
-    foreign key (idproveedor) references persona(idpersona),
-    foreign key (idusuario) references usuario(idusuario)
-);
-
-create table if not exists venta(
-	idventa int primary key auto_increment, 
-    idcliente int, 
-    idusuario int, 
-    tipo_comprobante varchar(20), 
-    serie_comprobante varchar(7), 
-    num_comprobante varchar(10), 
-    fecha datetime, 
-    impuesto decimal(4, 2), 
-    total decimal(11, 2), 
-    estado varchar(20), 
-    foreign key (idcliente) references persona(idpersona),
-    foreign key (idusuario) references usuario(idusuario)
-);
-
-create table if not exists detalle_venta(
-	iddetalle_venta int primary key auto_increment,
-    idventa int,
-    idarticulo int, 
-    cantidad int, 
-    precio decimal(11, 2), 
-    descuento decimal(11, 2), 
-    foreign key (idventa) references venta(idventa)
-);
-
-create table if not exists detalle_ingreso(
-	iddetalle_ingreso int, 
-    idingreso int, 
-    idarticulo int, 
-    cantidad int, 
-    precio decimal(11, 2),
-    foreign key (idingreso) references ingreso(idingreso)
+=======
+DDL_CREATE_CATEGORIA = '''
+CREATE TABLE IF NOT EXISTS categoria (
+    idcategoria INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(255),
+    estado BIT
+>>>>>>> feat/mock_data:ddl.py
 );
 '''
+
+DDL_CREATE_ARTICULO = '''
+CREATE TABLE IF NOT EXISTS articulo (
+    idarticulo INT PRIMARY KEY AUTO_INCREMENT,
+    idcategoria INT,
+    codigo VARCHAR(50) NOT NULL,
+    nombre VARCHAR(100),
+    precio_venta DECIMAL(11, 2),
+    stock INT,
+    descripcion VARCHAR(255),
+    imagen VARCHAR(20),
+    estado BIT,
+    FOREIGN KEY (idcategoria) REFERENCES categoria(idcategoria)
+);
+'''
+
+DDL_CREATE_PERSONA = '''
+CREATE TABLE IF NOT EXISTS persona (
+    idpersona INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_persona VARCHAR(20),
+    nombre VARCHAR(100),
+    tipo_documento VARCHAR(20),
+    num_documento VARCHAR(20),
+    direccion VARCHAR(70),
+    telefono VARCHAR(20),
+    email VARCHAR(50)
+);
+'''
+
+DDL_CREATE_ROL = '''
+CREATE TABLE IF NOT EXISTS rol (
+    idrol INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(30) NOT NULL,
+    descripcion VARCHAR(255),
+    estado BIT
+);
+'''
+
+DDL_CREATE_USUARIO = '''
+CREATE TABLE IF NOT EXISTS usuario (
+    idusuario INT PRIMARY KEY AUTO_INCREMENT,
+    idrol INT,
+    nombre VARCHAR(100),
+    tipo_documento VARCHAR(20),
+    num_documento VARCHAR(20),
+    direccion VARCHAR(20),
+    telefono VARCHAR(20),
+    email VARCHAR(50),
+    clave VARBINARY(255),
+    estado BIT,
+    FOREIGN KEY (idrol) REFERENCES rol(idrol)
+);
+'''
+
+DDL_CREATE_INGRESO = '''
+CREATE TABLE IF NOT EXISTS ingreso (
+    idingreso INT PRIMARY KEY AUTO_INCREMENT,
+    idproveedor INT,
+    idusuario INT,
+    tipo_comprobante VARCHAR(20),
+    serie_comprobante VARCHAR(20),
+    num_comprobante VARCHAR(10),
+    fecha DATETIME,
+    impuesto DECIMAL(4, 2),
+    total DECIMAL(11, 2),
+    estado VARCHAR(20),
+    FOREIGN KEY (idproveedor) REFERENCES persona(idpersona),
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario)
+);
+'''
+
+DDL_CREATE_VENTA = '''
+CREATE TABLE IF NOT EXISTS venta (
+    idventa INT PRIMARY KEY AUTO_INCREMENT,
+    idcliente INT,
+    idusuario INT,
+    tipo_comprobante VARCHAR(20),
+    serie_comprobante VARCHAR(7),
+    num_comprobante VARCHAR(10),
+    fecha DATETIME,
+    impuesto DECIMAL(4, 2),
+    total DECIMAL(11, 2),
+    estado VARCHAR(20),
+    FOREIGN KEY (idcliente) REFERENCES persona(idpersona),
+    FOREIGN KEY (idusuario) REFERENCES usuario(idusuario)
+);
+'''
+
+DDL_CREATE_DETALLE_VENTA = '''
+CREATE TABLE IF NOT EXISTS detalle_venta (
+    iddetalle_venta INT PRIMARY KEY AUTO_INCREMENT,
+    idventa INT,
+    idarticulo INT,
+    cantidad INT,
+    precio DECIMAL(11, 2),
+    descuento DECIMAL(11, 2),
+    FOREIGN KEY (idventa) REFERENCES venta(idventa)
+);
+'''
+
+DDL_CREATE_DETALLE_INGRESO = '''
+CREATE TABLE IF NOT EXISTS detalle_ingreso (
+    iddetalle_ingreso INT PRIMARY KEY AUTO_INCREMENT,
+    idingreso INT,
+    idarticulo INT,
+    cantidad INT,
+    precio DECIMAL(11, 2),
+    FOREIGN KEY (idingreso) REFERENCES ingreso(idingreso)
+);
+'''
+# SELECT queries
+SELECT_CATEGORIA = "SELECT * FROM categoria;"
+SELECT_ARTICULO = "SELECT * FROM articulo;"
+SELECT_PERSONA = "SELECT * FROM persona;"
+SELECT_ROL = "SELECT * FROM rol;"
+SELECT_USUARIO = "SELECT * FROM usuario;"
+SELECT_INGRESO = "SELECT * FROM ingreso;"
+SELECT_VENTA = "SELECT * FROM venta;"
+SELECT_DETALLE_VENTA = "SELECT * FROM detalle_venta;"
+SELECT_DETALLE_INGRESO = "SELECT * FROM detalle_ingreso;"
